@@ -64,20 +64,10 @@ const Home = () => {
           {lotteryStatus ? (
             <PrizeNFT />
           ) : (
-            <MediaRenderer
-              src={HERO_IMAGE_URL}
-              width="90%"
-              height="90%"
-            />
+            <MediaRenderer src={HERO_IMAGE_URL} width="90%" height="90%" />
           )}
         </Flex>
-        <Flex
-          justifyContent={"flex-start"}
-          alignItems={"center"}
-          p={"5%"}
-          color="white"
-          ml="30px" // Added left margin
-        >
+        <Flex justifyContent={"center"} alignItems={"center"} p={"5%"} color="white">
           <Stack spacing={10}>
             <Box>
               <Text fontSize={"xl"}></Text>
@@ -94,13 +84,16 @@ const Home = () => {
 
             <LotteryStatus status={lotteryStatus} />
             {!ticketCostLoading && (
-              <Text fontSize={"2xl"} fontWeight={"bold"}>
+              <Text fontSize={"1xl"} fontWeight={"bold"}>
                 Cost Per Ticket: {ticketCostInEther} MATIC
               </Text>
             )}
             {address ? (
               <Flex flexDirection={"row"} alignItems="center">
-                <Flex flexDirection={"row"} w={"25%"} mr={"40px"}>
+                <Text ml={4} color="red" textDecoration="underline" cursor="pointer" onClick={resetTicketAmount}>
+                  Reset
+                </Text>
+                <Flex flexDirection={"row"} w={"20%"} mr={"30px"}>
                   <Button onClick={decreaseTicketAmount}>-</Button>
                   <Input
                     value={ticketAmount}
@@ -113,7 +106,7 @@ const Home = () => {
                   />
                   <Button onClick={increaseTicketAmount}>+</Button>
                 </Flex>
-                <Text ml={4}>
+                <Text>
                   Selected Tickets:{" "}
                   <Text as="span" color="green">
                     {ticketAmount}
@@ -133,15 +126,6 @@ const Home = () => {
                 >
                   {`Buy Ticket(s)`}
                 </Web3Button>
-                <Text
-                  ml={4}
-                  color="red"
-                  textDecoration="underline"
-                  cursor="pointer"
-                  onClick={resetTicketAmount}
-                >
-                  Reset
-                </Text>
               </Flex>
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
@@ -161,4 +145,3 @@ const Home = () => {
 };
 
 export default Home;
-          
