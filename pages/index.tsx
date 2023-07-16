@@ -1,34 +1,44 @@
-import type { NextPage } from "next";
-import { Box, Button, Container, Flex, Input, SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import { MediaRenderer, Web3Button, useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
-import { HERO_IMAGE_URL, LOTTERY_CONTRACT_ADDRESS } from "../const/addresses";
-import LotteryStatus from "../components/Status";
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Input,
+  SimpleGrid,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import {
+  MediaRenderer,
+  Web3Button,
+  useAddress,
+  useContract,
+  useContractRead,
+} from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import PrizeNFT from "../components/PrizeNFT";
-import { useState } from "react";
 import CurrentEntries from "../components/CurrentEntries";
+import LotteryStatus from "../components/Status";
+import { HERO_IMAGE_URL, LOTTERY_CONTRACT_ADDRESS } from "../const/addresses";
 
-const Home: NextPage = () => {
+const Home = () => {
   const address = useAddress();
 
-  const {
-    contract
-  } = useContract(LOTTERY_CONTRACT_ADDRESS);
+  const { contract } = useContract(LOTTERY_CONTRACT_ADDRESS);
 
-  const {
-    data: lotteryStatus
-  } = useContractRead(contract, "lotteryStatus");
+  const { data: lotteryStatus } = useContractRead(contract, "lotteryStatus");
 
-  const {
-    data: ticketCost,
-    isLoading: ticketCostLoading
-  } = useContractRead(contract, "ticketCost");
-  const ticketCostInEther = ticketCost ? ethers.utils.formatEther(ticketCost) : "0";
+  const { data: ticketCost, isLoading: ticketCostLoading } = useContractRead(
+    contract,
+    "ticketCost"
+  );
+  const ticketCostInEther = ticketCost
+    ? ethers.utils.formatEther(ticketCost)
+    : "0";
 
-  const {
-    data: totalEntries,
-    isLoading: totalEntriesLoading
-  } = useContractRead(contract, "totalEntries");
+  const { data: totalEntries, isLoading: totalEntriesLoading } =
+    useContractRead(contract, "totalEntries");
 
   const [ticketAmount, setTicketAmount] = useState(0);
   const ticketCostSubmit = parseFloat(ticketCostInEther) * ticketAmount;
@@ -48,7 +58,7 @@ const Home: NextPage = () => {
       <SimpleGrid columns={2} spacing={4} minH={"60vh"}>
         <Flex justifyContent={"center"} alignItems={"center"}>
           {lotteryStatus ? (
-            <PrizeNFT/>
+            <PrizeNFT />
           ) : (
             <MediaRenderer
               src={HERO_IMAGE_URL}
@@ -56,52 +66,57 @@ const Home: NextPage = () => {
               height="90%"
             />
           )}
-          
         </Flex>
         <Flex justifyContent={"center"} alignItems={"center"} p={"5%"} color="white">
           <Stack spacing={10}>
             <Box>
               <Text fontSize={"xl"}></Text>
-              <Text fontSize={"4xl"} fontWeight={"bold"}>Buy tickets to win the NFT Prize!</Text>
+              <Text fontSize={"4xl"} fontWeight={"bold"}>
+                Buy tickets to win the NFT Prize!
+              </Text>
             </Box>
-            
-            <Text fontSize={"xl"}>Buy Entries for a chance, to win the NFT! Winner will be selected and transferred the NFT. More entries increase your chance of winning the prize.</Text>
-            
-            <LotteryStatus status={lotteryStatus}/>
+
+            <Text fontSize={"xl"}>
+              Buy Entries for a chance, to win the NFT! Winner will be selected
+              and transferred the NFT. More entries increase your chance of
+              winning the prize.
+            </Text>
+
+            <LotteryStatus status={lotteryStatus} />
             {!ticketCostLoading && (
-              <Text fontSize={"2xl"} fontWeight={"bold"}>Cost Per Ticket: {ticketCostInEther} MATIC</Text>
+              <Text fontSize={"2xl"} fontWeight={"bold"}>
+                Cost Per Ticket: {ticketCostInEther} MATIC
+              </Text>
             )}
             {address ? (
               <Flex flexDirection={"row"}>
                 <Flex flexDirection={"row"} w={"25%"} mr={"40px"}>
-                  <Button
-                    onClick={decreaseTicketAmount}
-                  >-</Button>
+                  <Button onClick={decreaseTicketAmount}>-</Button>
                   <Input
                     value={ticketAmount}
                     type={"number"}
-                    onChange={(e) => setTicketAmount(parseInt(e.target.value))}
+                    onChange={(e) =>
+                      setTicketAmount(parseInt(e.target.value))
+                    }
                     textAlign={"center"}
                     mx={2}
                   />
-                  <Button
-                    onClick={increaseTicketAmount}
-                  >+</Button>
+                  <Button onClick={increaseTicketAmount}>+</Button>
                 </Flex>
-                
+
                 <Web3Button
                   contractAddress={LOTTERY_CONTRACT_ADDRESS}
-                  action={(contract) => contract.call(
-                    "buyTicket",
-                    [
-                      ticketAmount
-                    ],
-                    {
-                      value: ethers.utils.parseEther(ticketCostSubmit.toString())
-                    }
-                  )}
+                  action={(contract) =>
+                    contract.call("buyTicket", [ticketAmount], {
+                      value: ethers.utils.parseEther(
+                        ticketCostSubmit.toString()
+                      ),
+                    })
+                  }
                   isDisabled={!lotteryStatus}
-                >{`Buy Ticket(s)`}</Web3Button>
+                >
+                  {`Buy Ticket(s)`}
+                </Web3Button>
               </Flex>
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
@@ -114,11 +129,11 @@ const Home: NextPage = () => {
       </SimpleGrid>
       <Stack mt={"40px"} textAlign={"center"}>
         <Text fontSize={"xl"}>Current lottery Participants:</Text>
-        <CurrentEntries/>
+        <CurrentEntries />
       </Stack>
     </Container>
   );
 };
 
 export default Home;
-      
+                
