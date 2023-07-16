@@ -44,7 +44,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <Container maxW={"1440px"}>
+    <Container maxW={"1440px"} bg="black">
       <SimpleGrid columns={2} spacing={4} minH={"60vh"}>
         <Flex justifyContent={"center"} alignItems={"center"}>
           {lotteryStatus ? (
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           )}
           
         </Flex>
-        <Flex justifyContent={"center"} alignItems={"center"} p={"5%"}>
+        <Flex justifyContent={"center"} alignItems={"center"} p={"5%"} color="white">
           <Stack spacing={10}>
             <Box>
               <Text fontSize={"xl"}>Raffle App</Text>
@@ -121,3 +121,4 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+      
