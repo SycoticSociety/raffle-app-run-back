@@ -77,7 +77,7 @@ const Home = () => {
             </Box>
 
             <Text fontSize={"xl"}>
-              Buy Entries for a chance, to win the NFT! Winner will be selected
+              Buy Entries for a chance to win the NFT! The winner will be selected
               and transferred the NFT. More entries increase your chance of
               winning the prize.
             </Text>
@@ -89,7 +89,7 @@ const Home = () => {
               </Text>
             )}
             {address ? (
-              <Flex flexDirection={"row"}>
+              <Flex flexDirection={"row"} alignItems="center">
                 <Flex flexDirection={"row"} w={"25%"} mr={"40px"}>
                   <Button onClick={decreaseTicketAmount}>-</Button>
                   <Input
@@ -117,6 +117,7 @@ const Home = () => {
                 >
                   {`Buy Ticket(s)`}
                 </Web3Button>
+                <Text ml={4}>{`Selected Tickets: ${ticketAmount}`}</Text>
               </Flex>
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
