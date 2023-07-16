@@ -82,7 +82,7 @@ const Home = () => {
               winning the prize.
             </Text>
 
-            <LotteryStatus status={lotteryStatus} />
+            <LotteryStatus status={lotteryStatus} fontSize="lg" lineHeight="50%" /> {/* Adjust font size and line height */}
             {!ticketCostLoading && (
               <Text fontSize={"1xl"} fontWeight={"bold"}>
                 Cost Per Ticket: {ticketCostInEther} MATIC
@@ -108,7 +108,7 @@ const Home = () => {
                 </Flex>
                 <Text>
                   Selected Tickets:{" "}
-                  <Text as="span" color="green">
+                  <Text as="span" color="green" fontSize="sm"> {/* Adjust font size */}
                     {ticketAmount}
                   </Text>
                 </Text>
@@ -145,3 +145,4 @@ const Home = () => {
 };
 
 export default Home;
+      
