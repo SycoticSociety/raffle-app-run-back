@@ -71,7 +71,13 @@ const Home = () => {
             />
           )}
         </Flex>
-        <Flex justifyContent={"center"} alignItems={"center"} p={"5%"} color="white">
+        <Flex
+          justifyContent={"flex-start"}
+          alignItems={"center"}
+          p={"5%"}
+          color="white"
+          ml="30px" // Added left margin
+        >
           <Stack spacing={10}>
             <Box>
               <Text fontSize={"xl"}></Text>
@@ -127,7 +133,13 @@ const Home = () => {
                 >
                   {`Buy Ticket(s)`}
                 </Web3Button>
-                <Text ml={4} color="red" textDecoration="underline" cursor="pointer" onClick={resetTicketAmount}>
+                <Text
+                  ml={4}
+                  color="red"
+                  textDecoration="underline"
+                  cursor="pointer"
+                  onClick={resetTicketAmount}
+                >
                   Reset
                 </Text>
               </Flex>
@@ -149,3 +161,4 @@ const Home = () => {
 };
 
 export default Home;
+          
