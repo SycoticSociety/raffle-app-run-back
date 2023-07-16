@@ -47,7 +47,7 @@
 }
 
 .code {
-  background: #fafafa;
+  background: #111;
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
@@ -111,9 +111,22 @@
 .footer {
   border-color: #222;
 }
-.code {
-  background: #111;
+
+body {
+  background-color: black;
+  color: white;
 }
-.logo img {
-  filter: invert(1);
+
+.card {
+  background-color: #1b2129;
+  color: inherit;
+  border: 1px solid #eaeaea;
+}
+
+.card:hover,
+.card:focus,
+.card:active {
+  background-color: #272c34;
+  color: #0ea5e9;
+  border-color: #0ea5e9;
 }
