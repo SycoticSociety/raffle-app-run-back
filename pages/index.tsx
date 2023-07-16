@@ -103,6 +103,7 @@ const Home = () => {
                   />
                   <Button onClick={increaseTicketAmount}>+</Button>
                 </Flex>
+                <Text ml={4}>{`Selected Tickets: ${ticketAmount}`}</Text>
 
                 <Web3Button
                   contractAddress={LOTTERY_CONTRACT_ADDRESS}
@@ -117,13 +118,12 @@ const Home = () => {
                 >
                   {`Buy Ticket(s)`}
                 </Web3Button>
-                <Text ml={4}>{`Selected Tickets: ${ticketAmount}`}</Text>
               </Flex>
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
             )}
             {!totalEntriesLoading && (
-              <Text>Total Entries: {totalEntries.toString()}</Text>
+              <Text mt={4}>Total Entries: {totalEntries.toString()}</Text>
             )}
           </Stack>
         </Flex>
@@ -137,4 +137,4 @@ const Home = () => {
 };
 
 export default Home;
-                
+                        
