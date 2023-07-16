@@ -16,9 +16,8 @@ export default function Navbar() {
     } = useContractRead(contract, "admin");
     console.log(admin);
 
-
     return (
-        <Container maxW={"1440px"} py={8}>
+        <Container maxW={"1440px"} py={8} bg="gray.800"> {/* Added bg="gray.800" for dark gray background */}
             <Flex flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
                 <Link href={"/"}>
                     <Text fontSize={"xl"} fontWeight={"bold"}>Raffle App</Text>
@@ -33,5 +32,5 @@ export default function Navbar() {
                 </Flex>
             </Flex>
         </Container>
-    )
+    );
 }
