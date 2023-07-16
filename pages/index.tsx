@@ -53,6 +53,10 @@ const Home = () => {
     }
   }
 
+  function resetTicketAmount() {
+    setTicketAmount(0);
+  }
+
   return (
     <Container maxW={"1440px"} bg="black">
       <SimpleGrid columns={2} spacing={4} minH={"60vh"}>
@@ -103,7 +107,12 @@ const Home = () => {
                   />
                   <Button onClick={increaseTicketAmount}>+</Button>
                 </Flex>
-                <Text ml={4}>{`Selected Tickets: ${ticketAmount}`}</Text>
+                <Text ml={4}>
+                  Selected Tickets:{" "}
+                  <Text as="span" color="green">
+                    {ticketAmount}
+                  </Text>
+                </Text>
 
                 <Web3Button
                   contractAddress={LOTTERY_CONTRACT_ADDRESS}
@@ -118,6 +127,9 @@ const Home = () => {
                 >
                   {`Buy Ticket(s)`}
                 </Web3Button>
+                <Text ml={4} color="red" textDecoration="underline" cursor="pointer" onClick={resetTicketAmount}>
+                  Reset
+                </Text>
               </Flex>
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
@@ -137,4 +149,3 @@ const Home = () => {
 };
 
 export default Home;
-                        
