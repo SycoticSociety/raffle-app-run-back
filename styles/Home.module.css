@@ -1,5 +1,6 @@
 .container {
-  padding: 0 2rem;
+  padding: 0 10%;
+  width: 120%;
 }
 
 .main {
@@ -111,9 +112,11 @@
 .footer {
   border-color: #222;
 }
+
 .code {
   background: #111;
 }
+
 .logo img {
   filter: invert(1);
-  }
+}
