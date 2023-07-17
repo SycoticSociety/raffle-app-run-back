@@ -43,6 +43,10 @@ const Home: NextPage = () => {
     }
   }
 
+  function resetTicketAmount() {
+    setTicketAmount(0);
+  }
+
   return (
     <Container maxW={"1440px"}>
       <SimpleGrid columns={2} spacing={4} minH={"60vh"}>
@@ -72,7 +76,7 @@ const Home: NextPage = () => {
               <Text fontSize={"2xl"} fontWeight={"bold"}>Cost Per Ticket: {ticketCostInEther} MATIC</Text>
             )}
             {address ? (
-              <Flex flexDirection={"row"}>
+              <Flex flexDirection={"row"} alignItems={"center"}>
                 <Flex flexDirection={"row"} w={"25%"} mr={"40px"}>
                   <Button
                     onClick={decreaseTicketAmount}
@@ -88,20 +92,21 @@ const Home: NextPage = () => {
                     onClick={increaseTicketAmount}
                   >+</Button>
                 </Flex>
-                
-                <Web3Button
-                  contractAddress={LOTTERY_CONTRACT_ADDRESS}
-                  action={(contract) => contract.call(
-                    "buyTicket",
-                    [
-                      ticketAmount
-                    ],
-                    {
-                      value: ethers.utils.parseEther(ticketCostSubmit.toString())
-                    }
-                  )}
-                  isDisabled={!lotteryStatus}
-                >{`Buy Ticket(s)`}</Web3Button>
+                <Text
+                  fontSize={"xl"}
+                  fontWeight={"bold"}
+                  color={"green"}
+                  mr={"20px"}
+                >
+                  Current Tickets: {ticketAmount}
+                </Text>
+                <Button
+                  size={"sm"}
+                  colorScheme={"red"}
+                  onClick={resetTicketAmount}
+                >
+                  Reset
+                </Button>
               </Flex>
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
@@ -121,4 +126,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-                        
