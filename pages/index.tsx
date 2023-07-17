@@ -66,7 +66,7 @@ const Home: NextPage = () => {
           <Stack spacing={10}>
             <Box>
               <Text fontSize={"xl"}></Text>
-              <Text fontSize={"4xl"} fontWeight={"bold"}>Buy tickets to win the NFT Prize!</Text>
+              <Text fontSize={"4xl"} fontWeight={"bold"}></Text>
             </Box>
             
             <Text fontSize={"xl"}>Buy entries for a chance to win the NFT! Winner will be selected and transferred the NFT. The more entries the higher chance you have of winning the prize.</Text>
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
             )}
             {address ? (
               <Flex flexDirection={"row"} alignItems={"center"}>
-                <Flex flexDirection={"row"} w={"25%"} mr={"40px"}>
+                <Flex flexDirection={"row"} w={"25%"} mr={"5px"}>
                   <Button
                     onClick={resetTicketAmount}
                     size={"sm"}
