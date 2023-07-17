@@ -119,7 +119,7 @@ const Home: NextPage = () => {
           color={"green"}
           ml={4} // Add margin left of 40px to the green "Current Tickets" text
         >
-          Current Tickets: {ticketAmount}
+          Tickets: {ticketAmount}
         </Text>
       </Flex>
       <Stack mt={"40px"} textAlign={"center"}>
