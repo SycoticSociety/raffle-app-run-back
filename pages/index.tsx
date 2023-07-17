@@ -61,7 +61,7 @@ const Home: NextPage = () => {
             </Box>
 
             <Text fontSize={"xl"}>
-              Buy entries for a chance to win the NFT! Winner will be selected and transferred the NFT. The more
+              Buy entries for a chance to win the NFT! The more
               entries the higher chance you have of winning the prize.
             </Text>
 
