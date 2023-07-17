@@ -1,4 +1,5 @@
-import type { NextPage } from "next";
+import { Box, Button, Container, Flex, Input, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { NextPage } from "next";
 import { useState } from "react";
 import { ethers } from "ethers";
 import { MediaRenderer, Web3Button, useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
@@ -6,7 +7,6 @@ import { HERO_IMAGE_URL, LOTTERY_CONTRACT_ADDRESS } from "../const/addresses";
 import LotteryStatus from "../components/Status";
 import PrizeNFT from "../components/PrizeNFT";
 import CurrentEntries from "../components/CurrentEntries";
-import { Box, Button, Container, Flex, Input, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
   const address = useAddress();
@@ -44,90 +44,93 @@ const Home: NextPage = () => {
   }
 
   return (
-    <Container maxW={"1440px"}>
-      <SimpleGrid columns={2} spacing={4} minH={"60vh"}>
-        <Flex justifyContent={"center"} alignItems={"center"}>
-          {lotteryStatus ? (
-            <PrizeNFT />
-          ) : (
-            <MediaRenderer src={HERO_IMAGE_URL} width="98%" height="98%" />
-          )}
-        </Flex>
-        <Flex justifyContent={"center"} alignItems={"center"} p={"5%"}>
-          <Stack spacing={10}>
-            <Box>
-              <Text fontSize={"xl"}></Text>
-              <Text fontSize={"4xl"} fontWeight={"bold"}></Text>
-            </Box>
+    <Box bgGradient="linear(to-b, #5F4B8B, #808080, #000000)" minHeight="100vh">
+      <Container maxW="1440px">
+        <SimpleGrid columns={2} spacing={4} minH="60vh">
+          <Flex justifyContent="center" alignItems="center">
+            {lotteryStatus ? (
+              <PrizeNFT />
+            ) : (
+              <MediaRenderer src={HERO_IMAGE_URL} width="98%" height="98%" />
+            )}
+          </Flex>
+          <Flex justifyContent="center" alignItems="center" p="5%">
+            <Stack spacing={10}>
+              <Box>
+                <Text fontSize="xl"></Text>
+                <Text fontSize="4xl" fontWeight="bold"></Text>
+              </Box>
 
-            <Text fontSize={"xl"}>
-              Buy entries for a chance to win the NFT! The more
-              entries the higher chance you have of winning the prize.
-            </Text>
-
-            <LotteryStatus status={lotteryStatus} />
-            {!ticketCostLoading && (
-              <Text fontSize={"2xl"} fontWeight={"bold"}>
-                Cost Per Ticket: {ticketCostInEther} MATIC
+              <Text fontSize="xl">
+                Buy entries for a chance to win the NFT! The more entries the higher chance you
+                have of winning the prize.
               </Text>
-            )}
-            {address && (
-              <Flex flexDirection={"row"} w={"25%"} mr={"5px"}>
-                <Button onClick={decreaseTicketAmount}>-</Button>
-                <Input
-                  value={ticketAmount}
-                  type={"number"}
-                  onChange={(e) => setTicketAmount(parseInt(e.target.value))}
-                  textAlign={"center"}
-                  mx={2}
-                />
-                <Button onClick={increaseTicketAmount}>+</Button>
-              </Flex>
-            )}
-            {!totalEntriesLoading && <Text>Total Entries: {totalEntries.toString()}</Text>}
-          </Stack>
-        </Flex>
-      </SimpleGrid>
-      {address ? (
-        <Flex flexDirection={"row"} alignItems={"center"}>
-          <Web3Button
-            contractAddress={LOTTERY_CONTRACT_ADDRESS}
-            action={(contract) =>
-              contract.call("buyTicket", [ticketAmount], {
-                value: ethers.utils.parseEther(ticketCostSubmit.toString())
-              })
-            }
-            isDisabled={!lotteryStatus}
+
+              <LotteryStatus status={lotteryStatus} />
+              {!ticketCostLoading && (
+                <Text fontSize="2xl" fontWeight="bold">
+                  Cost Per Ticket: {ticketCostInEther} MATIC 🔗
+                </Text>
+              )}
+              {address && (
+                <Flex flexDirection="row" w="25%" mr="5px">
+                  <Button onClick={decreaseTicketAmount}>-</Button>
+                  <Input
+                    value={ticketAmount}
+                    type="number"
+                    onChange={(e) => setTicketAmount(parseInt(e.target.value))}
+                    textAlign="center"
+                    mx={2}
+                  />
+                  <Button onClick={increaseTicketAmount}>+</Button>
+                </Flex>
+              )}
+              {!totalEntriesLoading && <Text>Total Entries: {totalEntries.toString()}</Text>}
+            </Stack>
+          </Flex>
+        </SimpleGrid>
+        {address ? (
+          <Flex flexDirection="row" alignItems="center">
+            <Web3Button
+              contractAddress={LOTTERY_CONTRACT_ADDRESS}
+              action={(contract) =>
+                contract.call("buyTicket", [ticketAmount], {
+                  value: ethers.utils.parseEther(ticketCostSubmit.toString())
+                })
+              }
+              isDisabled={!lotteryStatus}
+            >
+              Purchase Tickets ✔️🎫🎟️
+            </Web3Button>
+            <Text></Text>
+          </Flex>
+        ) : null}
+        <Flex flexDirection="row" alignItems="center">
+          <Button
+            onClick={resetTicketAmount}
+            size="sm"
+            colorScheme="red"
+            mt={4} // Add margin top of 40px to the red "Reset" button
           >
-            Purchase you&apos;re Tickets now 🤗
-          </Web3Button>
-          <Text></Text>
+            Reset
+          </Button>
+          <Text
+            fontSize="xl"
+            fontWeight="bold"
+            color="green"
+            ml={4} // Add margin left of 40px to the green "Current Tickets" text
+          >
+            Tickets: {ticketAmount}
+          </Text>
         </Flex>
-      ) : null}
-      <Flex flexDirection={"row"} alignItems={"center"}>
-        <Button
-          onClick={resetTicketAmount}
-          size={"sm"}
-          colorScheme={"red"}
-          mt={4} // Add margin top of 40px to the red "Reset" button
-        >
-          Reset
-        </Button>
-        <Text
-          fontSize={"xl"}
-          fontWeight={"bold"}
-          color={"green"}
-          ml={4} // Add margin left of 40px to the green "Current Tickets" text
-        >
-          Tickets: {ticketAmount}
-        </Text>
-      </Flex>
-      <Stack mt={"40px"} textAlign={"center"}>
-        <Text fontSize={"xl"}>Current Raffle Participants: </Text>
-        <CurrentEntries />
-      </Stack>
-    </Container>
+        <Stack mt="40px" textAlign="center">
+          <Text fontSize="xl">Current Raffle Participants: </Text>
+          <CurrentEntries />
+        </Stack>
+      </Container>
+    </Box>
   );
 };
 
 export default Home;
+              
