@@ -72,15 +72,7 @@ const Home: NextPage = () => {
               </Text>
             )}
             {address ? (
-              <Flex flexDirection={"row"} alignItems={"center"}>
-                <Button
-                  onClick={resetTicketAmount}
-                  size={"sm"}
-                  colorScheme={"red"}
-                  mt={4} // Add margin top of 40px to the red "Reset" button
-                >
-                  Reset
-                </Button>
+              
                 <Flex flexDirection={"row"} w={"25%"} mr={"5px"}>
                   <Button onClick={decreaseTicketAmount}>-</Button>
                   <Input
@@ -92,6 +84,24 @@ const Home: NextPage = () => {
                   />
                   <Button onClick={increaseTicketAmount}>+</Button>
                 </Flex>
+                
+              </Flex>
+            ) : (
+              <Text>Connect wallet</Text>
+            )}
+            {!totalEntriesLoading && <Text>Total Entries: {totalEntries.toString()}</Text>}
+          </Stack>
+        </Flex>
+      </SimpleGrid>
+      <Flex flexDirection={"row"} alignItems={"center"}>
+                <Button
+                  onClick={resetTicketAmount}
+                  size={"sm"}
+                  colorScheme={"red"}
+                  mt={4} // Add margin top of 40px to the red "Reset" button
+                >
+                  Reset
+                </Button>
                 <Text
                   fontSize={"xl"}
                   fontWeight={"bold"}
@@ -100,14 +110,6 @@ const Home: NextPage = () => {
                 >
                   Current Tickets: {ticketAmount}
                 </Text>
-              </Flex>
-            ) : (
-              <Text>Connect wallet to buy ticket.</Text>
-            )}
-            {!totalEntriesLoading && <Text>Total Entries: {totalEntries.toString()}</Text>}
-          </Stack>
-        </Flex>
-      </SimpleGrid>
       <Stack mt={"40px"} textAlign={"center"}>
         <Text fontSize={"xl"}>Current Raffle Participants:</Text>
         <CurrentEntries />
