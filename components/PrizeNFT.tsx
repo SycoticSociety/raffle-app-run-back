@@ -14,12 +14,12 @@ export default function PrizeNFT() {
     const { data: nft, isLoading: nftLoading } = useNFT(nftContract, nftTokenId);
 
     return (
-        <Card p="5%" ml="5px" backgroundColor="rgba(255, 255, 255, 0.1)" color="white">
+        <Card p="5%" ml="5px" backgroundColor="rgba(255, 255, 255, 0.2)" color="gray">
             <Heading></Heading>
             {!nftContractMetadataLoading && !nftLoading ? (
                 <Stack spacing="20px" textAlign="center">
                     <Box>
-                        <ThirdwebNftMedia metadata={nft?.metadata!} height="80%" width="80%" />
+                        <ThirdwebNftMedia metadata={nft?.metadata!} height="97%" width="97%" />
                     </Box>
                     <Box>
                         <Text fontSize="2xl" fontWeight="bold" color="white">{nftContractMetadata.name}</Text>
