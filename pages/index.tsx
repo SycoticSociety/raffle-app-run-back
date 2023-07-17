@@ -11,24 +11,20 @@ import { Box, Button, Container, Flex, Input, SimpleGrid, Stack, Text } from "@c
 const Home: NextPage = () => {
   const address = useAddress();
 
-  const {
-    contract
-  } = useContract(LOTTERY_CONTRACT_ADDRESS);
+  const { contract } = useContract(LOTTERY_CONTRACT_ADDRESS);
 
-  const {
-    data: lotteryStatus
-  } = useContractRead(contract, "lotteryStatus");
+  const { data: lotteryStatus } = useContractRead(contract, "lotteryStatus");
 
-  const {
-    data: ticketCost,
-    isLoading: ticketCostLoading
-  } = useContractRead(contract, "ticketCost");
+  const { data: ticketCost, isLoading: ticketCostLoading } = useContractRead(
+    contract,
+    "ticketCost"
+  );
   const ticketCostInEther = ticketCost ? ethers.utils.formatEther(ticketCost) : "0";
 
-  const {
-    data: totalEntries,
-    isLoading: totalEntriesLoading
-  } = useContractRead(contract, "totalEntries");
+  const { data: totalEntries, isLoading: totalEntriesLoading } = useContractRead(
+    contract,
+    "totalEntries"
+  );
 
   const [ticketAmount, setTicketAmount] = useState(0);
   const ticketCostSubmit = parseFloat(ticketCostInEther) * ticketAmount;
@@ -52,15 +48,10 @@ const Home: NextPage = () => {
       <SimpleGrid columns={2} spacing={4} minH={"60vh"}>
         <Flex justifyContent={"center"} alignItems={"center"}>
           {lotteryStatus ? (
-            <PrizeNFT/>
+            <PrizeNFT />
           ) : (
-            <MediaRenderer
-              src={HERO_IMAGE_URL}
-              width="85%"
-              height="85%"
-            />
+            <MediaRenderer src={HERO_IMAGE_URL} width="85%" height="85%" />
           )}
-          
         </Flex>
         <Flex justifyContent={"center"} alignItems={"center"} p={"5%"}>
           <Stack spacing={10}>
@@ -68,26 +59,30 @@ const Home: NextPage = () => {
               <Text fontSize={"xl"}></Text>
               <Text fontSize={"4xl"} fontWeight={"bold"}></Text>
             </Box>
-            
-            <Text fontSize={"xl"}>Buy entries for a chance to win the NFT! Winner will be selected and transferred the NFT. The more entries the higher chance you have of winning the prize.</Text>
-            
-            <LotteryStatus status={lotteryStatus}/>
+
+            <Text fontSize={"xl"}>
+              Buy entries for a chance to win the NFT! Winner will be selected and transferred the NFT. The more
+              entries the higher chance you have of winning the prize.
+            </Text>
+
+            <LotteryStatus status={lotteryStatus} />
             {!ticketCostLoading && (
-              <Text fontSize={"2xl"} fontWeight={"bold"}>Cost Per Ticket: {ticketCostInEther} MATIC</Text>
+              <Text fontSize={"2xl"} fontWeight={"bold"}>
+                Cost Per Ticket: {ticketCostInEther} MATIC
+              </Text>
             )}
             {address ? (
               <Flex flexDirection={"row"} alignItems={"center"}>
+                <Button
+                  onClick={resetTicketAmount}
+                  size={"sm"}
+                  colorScheme={"red"}
+                  mt={4} // Add margin top of 40px to the red "Reset" button
+                >
+                  Reset
+                </Button>
                 <Flex flexDirection={"row"} w={"25%"} mr={"5px"}>
-                  <Button
-                    onClick={resetTicketAmount}
-                    size={"sm"}
-                    colorScheme={"red"}
-                  >
-                    Reset
-                  </Button>
-                  <Button
-                    onClick={decreaseTicketAmount}
-                  >-</Button>
+                  <Button onClick={decreaseTicketAmount}>-</Button>
                   <Input
                     value={ticketAmount}
                     type={"number"}
@@ -95,15 +90,13 @@ const Home: NextPage = () => {
                     textAlign={"center"}
                     mx={2}
                   />
-                  <Button
-                    onClick={increaseTicketAmount}
-                  >+</Button>
+                  <Button onClick={increaseTicketAmount}>+</Button>
                 </Flex>
                 <Text
                   fontSize={"xl"}
                   fontWeight={"bold"}
                   color={"green"}
-                  mr={"20px"}
+                  ml={4} // Add margin left of 40px to the green "Current Tickets" text
                 >
                   Current Tickets: {ticketAmount}
                 </Text>
@@ -111,19 +104,17 @@ const Home: NextPage = () => {
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
             )}
-            {!totalEntriesLoading && (
-              <Text>Total Entries: {totalEntries.toString()}</Text>
-            )}
+            {!totalEntriesLoading && <Text>Total Entries: {totalEntries.toString()}</Text>}
           </Stack>
         </Flex>
       </SimpleGrid>
       <Stack mt={"40px"} textAlign={"center"}>
         <Text fontSize={"xl"}>Current Raffle Participants:</Text>
-        <CurrentEntries/>
+        <CurrentEntries />
       </Stack>
     </Container>
   );
 };
 
 export default Home;
-              
+    
