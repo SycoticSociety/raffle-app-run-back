@@ -99,7 +99,7 @@ const Home: NextPage = () => {
             }
             isDisabled={!lotteryStatus}
           >
-            Purchase you&apos;re Tickets now!
+            Purchase you&apos;re Tickets now 🤗
           </Web3Button>
           <Text></Text>
         </Flex>
@@ -123,7 +123,7 @@ const Home: NextPage = () => {
         </Text>
       </Flex>
       <Stack mt={"40px"} textAlign={"center"}>
-        <Text fontSize={"xl"}>Current Raffle Participants:</Text>
+        <Text fontSize={"xl"}>Current Raffle Participants: </Text>
         <CurrentEntries />
       </Stack>
     </Container>
