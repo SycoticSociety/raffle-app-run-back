@@ -72,19 +72,16 @@ const Home: NextPage = () => {
               </Text>
             )}
             {address ? (
-              
-                <Flex flexDirection={"row"} w={"25%"} mr={"5px"}>
-                  <Button onClick={decreaseTicketAmount}>-</Button>
-                  <Input
-                    value={ticketAmount}
-                    type={"number"}
-                    onChange={(e) => setTicketAmount(parseInt(e.target.value))}
-                    textAlign={"center"}
-                    mx={2}
-                  />
-                  <Button onClick={increaseTicketAmount}>+</Button>
-                </Flex>
-                
+              <Flex flexDirection={"row"} w={"25%"} mr={"5px"}>
+                <Button onClick={decreaseTicketAmount}>-</Button>
+                <Input
+                  value={ticketAmount}
+                  type={"number"}
+                  onChange={(e) => setTicketAmount(parseInt(e.target.value))}
+                  textAlign={"center"}
+                  mx={2}
+                />
+                <Button onClick={increaseTicketAmount}>+</Button>
               </Flex>
             ) : (
               <Text>Connect wallet</Text>
@@ -94,22 +91,23 @@ const Home: NextPage = () => {
         </Flex>
       </SimpleGrid>
       <Flex flexDirection={"row"} alignItems={"center"}>
-                <Button
-                  onClick={resetTicketAmount}
-                  size={"sm"}
-                  colorScheme={"red"}
-                  mt={4} // Add margin top of 40px to the red "Reset" button
-                >
-                  Reset
-                </Button>
-                <Text
-                  fontSize={"xl"}
-                  fontWeight={"bold"}
-                  color={"green"}
-                  ml={4} // Add margin left of 40px to the green "Current Tickets" text
-                >
-                  Current Tickets: {ticketAmount}
-                </Text>
+        <Button
+          onClick={resetTicketAmount}
+          size={"sm"}
+          colorScheme={"red"}
+          mt={4} // Add margin top of 40px to the red "Reset" button
+        >
+          Reset
+        </Button>
+        <Text
+          fontSize={"xl"}
+          fontWeight={"bold"}
+          color={"green"}
+          ml={4} // Add margin left of 40px to the green "Current Tickets" text
+        >
+          Current Tickets: {ticketAmount}
+        </Text>
+      </Flex>
       <Stack mt={"40px"} textAlign={"center"}>
         <Text fontSize={"xl"}>Current Raffle Participants:</Text>
         <CurrentEntries />
@@ -119,4 +117,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-    
