@@ -99,7 +99,7 @@ const Home: NextPage = () => {
             }
             isDisabled={!lotteryStatus}
           >
-            Purchase you're Tickets mow!
+            Purchase you&apos;re Tickets now!
           </Web3Button>
           <Text></Text>
         </Flex>
@@ -131,4 +131,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-          
