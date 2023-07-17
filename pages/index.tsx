@@ -79,6 +79,13 @@ const Home: NextPage = () => {
               <Flex flexDirection={"row"} alignItems={"center"}>
                 <Flex flexDirection={"row"} w={"25%"} mr={"40px"}>
                   <Button
+                    onClick={resetTicketAmount}
+                    size={"sm"}
+                    colorScheme={"red"}
+                  >
+                    Reset
+                  </Button>
+                  <Button
                     onClick={decreaseTicketAmount}
                   >-</Button>
                   <Input
@@ -100,13 +107,6 @@ const Home: NextPage = () => {
                 >
                   Current Tickets: {ticketAmount}
                 </Text>
-                <Button
-                  size={"sm"}
-                  colorScheme={"red"}
-                  onClick={resetTicketAmount}
-                >
-                  Reset
-                </Button>
               </Flex>
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
@@ -126,3 +126,4 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+              
