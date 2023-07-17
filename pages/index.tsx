@@ -59,7 +59,7 @@ const Home = () => {
 
   return (
     <Container maxW={"1440px"} bg="black">
-      <SimpleGrid columns={2} spacing={4} minH={"60vh"}>
+      <SimpleGrid columns={2} spacing={4} minH={"90vh"}>
         <Flex justifyContent={"center"} alignItems={"center"}>
           {lotteryStatus ? (
             <PrizeNFT />
@@ -90,10 +90,10 @@ const Home = () => {
             )}
             {address ? (
               <Flex flexDirection={"row"} alignItems="center">
-                <Text ml={4} color="red" textDecoration="underline" cursor="pointer" onClick={resetTicketAmount}>
+                <Text ml={6} color="red" textDecoration="underline" cursor="pointer" onClick={resetTicketAmount}>
                   Reset
                 </Text>
-                <Flex flexDirection={"row"} w={"20%"} mr={"30px"}>
+                <Flex flexDirection={"row"} w={"20%"} mr={"60px"}>
                   <Button onClick={decreaseTicketAmount}>-</Button>
                   <Input
                     value={ticketAmount}
@@ -124,20 +124,20 @@ const Home = () => {
                   }
                   isDisabled={!lotteryStatus}
                 >
-                  {`Buy Ticket(s)`}
+                  {`Buy`}
                 </Web3Button>
               </Flex>
             ) : (
               <Text>Connect wallet to buy ticket.</Text>
             )}
             {!totalEntriesLoading && (
-              <Text mt={4}>Total Entries: {totalEntries.toString()}</Text>
+              <Text mt={6}>Total Entries: {totalEntries.toString()}</Text>
             )}
           </Stack>
         </Flex>
       </SimpleGrid>
-      <Stack mt={"40px"} textAlign={"center"}>
-        <Text fontSize={"xl"}>Current lottery Participants:</Text>
+      <Stack mt={"30px"} textAlign={"center"}>
+        <Text fontSize={"xl"}>Lottery Participants:</Text>
         <CurrentEntries />
       </Stack>
     </Container>
