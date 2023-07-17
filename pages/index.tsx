@@ -71,7 +71,7 @@ const Home: NextPage = () => {
                 Cost Per Ticket: {ticketCostInEther} MATIC
               </Text>
             )}
-            {address ? (
+            {address && (
               <Flex flexDirection={"row"} w={"25%"} mr={"5px"}>
                 <Button onClick={decreaseTicketAmount}>-</Button>
                 <Input
@@ -83,29 +83,27 @@ const Home: NextPage = () => {
                 />
                 <Button onClick={increaseTicketAmount}>+</Button>
               </Flex>
-            ) : (
-              
             )}
             {!totalEntriesLoading && <Text>Total Entries: {totalEntries.toString()}</Text>}
           </Stack>
         </Flex>
       </SimpleGrid>
-           <Web3Button
-                  contractAddress={LOTTERY_CONTRACT_ADDRESS}
-                  action={(contract) => contract.call(
-                    "buyTicket",
-                    [
-                      ticketAmount
-                    ],
-                    {
-                      value: ethers.utils.parseEther(ticketCostSubmit.toString())
-                    }
-                  )}
-                  isDisabled={!lotteryStatus}
-                >{`Buy Ticket(s)`}</Web3Button>
-               </Flex>
-              <Text>Connect wallet to buy ticket.</Text>
-    
+      {address ? (
+        <Flex flexDirection={"row"} alignItems={"center"}>
+          <Web3Button
+            contractAddress={LOTTERY_CONTRACT_ADDRESS}
+            action={(contract) =>
+              contract.call("buyTicket", [ticketAmount], {
+                value: ethers.utils.parseEther(ticketCostSubmit.toString())
+              })
+            }
+            isDisabled={!lotteryStatus}
+          >
+            Buy Ticket(s)
+          </Web3Button>
+          <Text>Connect wallet to buy ticket.</Text>
+        </Flex>
+      ) : null}
       <Flex flexDirection={"row"} alignItems={"center"}>
         <Button
           onClick={resetTicketAmount}
@@ -133,3 +131,4 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+          
