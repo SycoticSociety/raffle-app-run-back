@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
-import { Box, Button, Container, Flex, Input, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { ethers } from "ethers";
 import { MediaRenderer, Web3Button, useAddress, useContract, useContractRead } from "@thirdweb-dev/react";
 import { HERO_IMAGE_URL, LOTTERY_CONTRACT_ADDRESS } from "../const/addresses";
 import LotteryStatus from "../components/Status";
-import { ethers } from "ethers";
 import PrizeNFT from "../components/PrizeNFT";
-import { useState } from "react";
 import CurrentEntries from "../components/CurrentEntries";
+import { Box, Button, Container, Flex, Input, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
   const address = useAddress();
@@ -121,3 +121,4 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+                        
