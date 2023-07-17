@@ -50,7 +50,7 @@ const Home: NextPage = () => {
           {lotteryStatus ? (
             <PrizeNFT />
           ) : (
-            <MediaRenderer src={HERO_IMAGE_URL} width="85%" height="85%" />
+            <MediaRenderer src={HERO_IMAGE_URL} width="98%" height="98%" />
           )}
         </Flex>
         <Flex justifyContent={"center"} alignItems={"center"} p={"5%"}>
@@ -99,9 +99,9 @@ const Home: NextPage = () => {
             }
             isDisabled={!lotteryStatus}
           >
-            Buy Ticket(s)
+            Purchase you're Tickets mow!
           </Web3Button>
-          <Text>Connect wallet to buy ticket.</Text>
+          <Text></Text>
         </Flex>
       ) : null}
       <Flex flexDirection={"row"} alignItems={"center"}>
