@@ -84,12 +84,28 @@ const Home: NextPage = () => {
                 <Button onClick={increaseTicketAmount}>+</Button>
               </Flex>
             ) : (
-              <Text>Connect wallet</Text>
+              
             )}
             {!totalEntriesLoading && <Text>Total Entries: {totalEntries.toString()}</Text>}
           </Stack>
         </Flex>
       </SimpleGrid>
+           <Web3Button
+                  contractAddress={LOTTERY_CONTRACT_ADDRESS}
+                  action={(contract) => contract.call(
+                    "buyTicket",
+                    [
+                      ticketAmount
+                    ],
+                    {
+                      value: ethers.utils.parseEther(ticketCostSubmit.toString())
+                    }
+                  )}
+                  isDisabled={!lotteryStatus}
+                >{`Buy Ticket(s)`}</Web3Button>
+               </Flex>
+              <Text>Connect wallet to buy ticket.</Text>
+    
       <Flex flexDirection={"row"} alignItems={"center"}>
         <Button
           onClick={resetTicketAmount}
